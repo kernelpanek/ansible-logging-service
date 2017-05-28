@@ -1,0 +1,30 @@
+---
+version: '2'
+services:
+  dbdata:
+    image: postgres:9.6
+    volumes:
+      - /var/lib/postgresql
+    command: "true"
+  db:
+    restart: always
+    image: postgres:9.6
+    volumes_from:
+      - dbdata
+    environment:
+      - POSTGRES_USER=anslog
+      - POSTGRES_PASSWORD=anslog
+      - POSTGRES_DB=ansiblelog
+    ports:
+      - "5432:5432"
+  web:
+    restart: always
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./logging_svc_webapp:/code
+      - ./environments:/code/environments
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
