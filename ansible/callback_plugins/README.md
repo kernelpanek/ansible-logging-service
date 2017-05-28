@@ -1,6 +1,6 @@
 # How-To-Use Options
 
-1. Wherever you run your playbooks, place `callback_plugins/activity_capture.py` at the root of this directory.
+1. Wherever you run your playbooks, place `callback_plugins/activity_capture.py` at the root of that directory.
 
 OR 
 
